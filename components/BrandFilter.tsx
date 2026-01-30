@@ -2,14 +2,24 @@ import * as Haptics from 'expo-haptics';
 import React from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
-const BRANDS = ['All', 'Bvlgari', 'Michael Kors', 'Burberry', 'Ferragamo', 'Fendi'];
+const BRANDS = [
+  'All',
+  'Bvlgari',
+  'Michael Kors',
+  'Burberry',
+  'Ferragamo',
+  'Fendi',
+];
 
 interface BrandFilterProps {
   selectedBrand: string;
   onSelectBrand: (brand: string) => void;
 }
 
-export default function BrandFilter({ selectedBrand, onSelectBrand }: BrandFilterProps) {
+export default function BrandFilter({
+  selectedBrand,
+  onSelectBrand,
+}: BrandFilterProps) {
   return (
     <View className="mb-4">
       <ScrollView
@@ -28,9 +38,7 @@ export default function BrandFilter({ selectedBrand, onSelectBrand }: BrandFilte
                 onSelectBrand(brand);
               }}
               className={`px-5 py-2.5 rounded-full ${
-                isSelected
-                  ? 'bg-red-500'
-                  : 'bg-white border border-gray-200'
+                isSelected ? 'bg-red-500' : 'bg-white border border-gray-200'
               }`}
               style={{
                 shadowColor: '#000',

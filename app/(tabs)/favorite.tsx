@@ -7,8 +7,15 @@ import { useFocusEffect } from '@react-navigation/native';
 import * as Haptics from 'expo-haptics';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Alert, FlatList, Image, Pressable, RefreshControl, Text, View } from 'react-native';
-
+import {
+  Alert,
+  FlatList,
+  Image,
+  Pressable,
+  RefreshControl,
+  Text,
+  View,
+} from 'react-native';
 
 export default function FavoritesScreen() {
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
@@ -33,7 +40,7 @@ export default function FavoritesScreen() {
   useFocusEffect(
     React.useCallback(() => {
       loadFavorites();
-    }, [])
+    }, []),
   );
 
   const handleRemove = async (handbagId: string) => {
@@ -47,13 +54,15 @@ export default function FavoritesScreen() {
           text: 'Remove',
           style: 'destructive',
           onPress: async () => {
-            await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+            await Haptics.notificationAsync(
+              Haptics.NotificationFeedbackType.Success,
+            );
             await favoriteService.removeFromFavorites(handbagId);
             await refreshFavorites();
             loadFavorites();
           },
         },
-      ]
+      ],
     );
   };
 
@@ -68,19 +77,23 @@ export default function FavoritesScreen() {
           text: 'Clear All',
           style: 'destructive',
           onPress: async () => {
-            await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+            await Haptics.notificationAsync(
+              Haptics.NotificationFeedbackType.Success,
+            );
             await favoriteService.clearFavorites();
             await refreshFavorites();
             loadFavorites();
           },
         },
-      ]
+      ],
     );
   };
 
   const renderItem = ({ item }: { item: FavoriteItem }) => (
     <Pressable
-      onPress={() => router.push({ pathname: '/detail/[id]', params: { id: item.id } })}
+      onPress={() =>
+        router.push({ pathname: '/detail/[id]', params: { id: item.id } })
+      }
       className="bg-white rounded-xl mb-3 mx-4 p-3 flex-row shadow-sm"
     >
       <Image
@@ -88,24 +101,24 @@ export default function FavoritesScreen() {
         className="w-24 h-24 rounded-lg"
         resizeMode="cover"
       />
-      
+
       <View className="flex-1 ml-3 justify-between">
         <View>
           <Text className="text-xs text-gray-500 mb-1">{item.brand}</Text>
-          <Text className="text-sm font-semibold text-gray-800" numberOfLines={2}>
+          <Text
+            className="text-sm font-semibold text-gray-800"
+            numberOfLines={2}
+          >
             {item.handbagName}
           </Text>
         </View>
-        
+
         <View className="flex-row items-center justify-between">
           <Text className="text-base font-bold text-red-500">
             {formatCurrency(item.cost)}
           </Text>
-          
-          <Pressable
-            onPress={() => handleRemove(item.id)}
-            className="p-2"
-          >
+
+          <Pressable onPress={() => handleRemove(item.id)} className="p-2">
             <Ionicons name="trash-outline" size={20} color="#FF6B6B" />
           </Pressable>
         </View>
@@ -126,12 +139,14 @@ export default function FavoritesScreen() {
       <View className="bg-white pt-16 pb-4 px-4 border-b border-gray-100">
         <View className="flex-row items-center justify-between">
           <View>
-            <Text className="text-2xl font-bold text-gray-800">My Favorites</Text>
+            <Text className="text-2xl font-bold text-gray-800">
+              My Favorites
+            </Text>
             <Text className="text-sm text-gray-500 mt-1">
               {favorites.length} items saved
             </Text>
           </View>
-          
+
           {favorites.length > 0 && (
             <Pressable onPress={handleClearAll} className="px-3 py-2">
               <Text className="text-red-500 font-semibold">Clear All</Text>

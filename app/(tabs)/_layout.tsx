@@ -34,7 +34,7 @@ export default function TabLayout() {
           ),
         }}
       />
-      
+
       <Tabs.Screen
         name="favorite"
         options={{
@@ -50,7 +50,7 @@ export default function TabLayout() {
           },
         }}
       />
-      
+
       <Tabs.Screen
         name="profile"
         options={{

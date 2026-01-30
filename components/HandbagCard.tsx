@@ -19,9 +19,7 @@ export default function HandbagCard({ handbag }: HandbagCardProps) {
     try {
       await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
       await toggleFavorite(handbag);
-      await Haptics.notificationAsync(
-        Haptics.NotificationFeedbackType.Success
-      );
+      await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
     } catch (error) {
       Alert.alert('Error', 'Failed to update favorites');
     }
@@ -31,7 +29,7 @@ export default function HandbagCard({ handbag }: HandbagCardProps) {
     await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     router.push({
       pathname: '/detail/[id]',
-      params: { id: handbag.id }
+      params: { id: handbag.id },
     });
   };
 
@@ -47,7 +45,7 @@ export default function HandbagCard({ handbag }: HandbagCardProps) {
           className="w-full aspect-square"
           resizeMode="cover"
         />
-        
+
         {handbag.percentOff > 0 && (
           <View className="absolute top-2 left-2 bg-red-500 rounded-full px-2 py-1">
             <Text className="text-white text-xs font-bold">

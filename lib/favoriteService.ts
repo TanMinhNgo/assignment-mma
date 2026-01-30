@@ -1,15 +1,15 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { FavoriteItem, Handbag } from "@/types";
+import { FavoriteItem, Handbag } from '@/types';
 
-const FAVORITES_KEY = "@handbag_favorites";
+const FAVORITES_KEY = '@handbag_favorites';
 
 export const getFavorites = async (): Promise<FavoriteItem[]> => {
   try {
     const favoritesJson = await AsyncStorage.getItem(FAVORITES_KEY);
     return favoritesJson ? JSON.parse(favoritesJson) : [];
   } catch (error) {
-    console.error("Error getting favorites:", error);
+    console.error('Error getting favorites:', error);
     return [];
   }
 };
@@ -29,8 +29,8 @@ export const addToFavorites = async (handbag: Handbag): Promise<boolean> => {
     await AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(updatedFavorites));
     return true;
   } catch (error) {
-    console.error("Error adding to favorites:", error);
-    throw new Error("Failed to add to favorites");
+    console.error('Error adding to favorites:', error);
+    throw new Error('Failed to add to favorites');
   }
 };
 
@@ -43,8 +43,8 @@ export const removeFromFavorites = async (
     await AsyncStorage.setItem(FAVORITES_KEY, JSON.stringify(updatedFavorites));
     return true;
   } catch (error) {
-    console.error("Error removing from favorites:", error);
-    throw new Error("Failed to remove from favorites");
+    console.error('Error removing from favorites:', error);
+    throw new Error('Failed to remove from favorites');
   }
 };
 
@@ -53,7 +53,7 @@ export const clearFavorites = async (): Promise<boolean> => {
     await AsyncStorage.removeItem(FAVORITES_KEY);
     return true;
   } catch (error) {
-    console.error("Error clearing favorites:", error);
+    console.error('Error clearing favorites:', error);
     return false;
   }
 };

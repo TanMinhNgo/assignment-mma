@@ -1,6 +1,12 @@
 import * as favoriteService from '@/lib/favoriteService';
 import { Handbag } from '@/types';
-import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 interface FavoritesContextType {
   favorites: string[];
@@ -10,14 +16,16 @@ interface FavoritesContextType {
   refreshFavorites: () => Promise<void>;
 }
 
-const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
+const FavoritesContext = createContext<FavoritesContextType | undefined>(
+  undefined,
+);
 
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<string[]>([]);
 
   const loadFavorites = async () => {
     const favs = await favoriteService.getFavorites();
-    setFavorites(favs.map(f => f.id));
+    setFavorites(favs.map((f) => f.id));
   };
 
   useEffect(() => {

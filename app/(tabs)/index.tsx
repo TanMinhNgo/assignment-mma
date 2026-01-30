@@ -5,7 +5,17 @@ import { Handbag } from '@/types';
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Keyboard, Pressable, RefreshControl, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Keyboard,
+  Pressable,
+  RefreshControl,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
 export default function HomeScreen() {
   const [handbags, setHandbags] = useState<Handbag[]>([]);
@@ -40,15 +50,16 @@ export default function HomeScreen() {
     let filtered = handbags;
 
     if (selectedBrand !== 'All') {
-      filtered = filtered.filter(bag => bag.brand === selectedBrand);
+      filtered = filtered.filter((bag) => bag.brand === selectedBrand);
     }
 
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(bag =>
-        bag.handbagName.toLowerCase().includes(query) ||
-        bag.brand.toLowerCase().includes(query) ||
-        bag.category.toLowerCase().includes(query)
+      filtered = filtered.filter(
+        (bag) =>
+          bag.handbagName.toLowerCase().includes(query) ||
+          bag.brand.toLowerCase().includes(query) ||
+          bag.category.toLowerCase().includes(query),
       );
     }
 
@@ -83,7 +94,9 @@ export default function HomeScreen() {
     return (
       <View className="flex-1 items-center justify-center bg-gray-50 px-6">
         <Ionicons name="alert-circle-outline" size={64} color="#FF6B6B" />
-        <Text className="mt-4 text-lg font-semibold text-gray-800">{error}</Text>
+        <Text className="mt-4 text-lg font-semibold text-gray-800">
+          {error}
+        </Text>
         <Text className="mt-2 text-gray-600 text-center">
           Pull down to refresh
         </Text>
@@ -101,7 +114,12 @@ export default function HomeScreen() {
           </Text>
 
           <View className="mt-4 flex-row bg-gray-100 rounded-full px-4 py-3">
-            <Ionicons name="search-outline" size={20} color="#999" className='mt-1' />
+            <Ionicons
+              name="search-outline"
+              size={20}
+              color="#999"
+              className="mt-1"
+            />
             <TextInput
               className="flex-1 ml-2 text-base text-gray-800 mb-1"
               placeholder="Search handbags, brands, categories..."
@@ -114,7 +132,12 @@ export default function HomeScreen() {
             />
             {searchQuery.length > 0 && (
               <Pressable onPress={handleClearSearch} className="ml-2">
-                <Ionicons name="close-circle" size={20} color="#999" className='mt-1' />
+                <Ionicons
+                  name="close-circle"
+                  size={20}
+                  color="#999"
+                  className="mt-1"
+                />
               </Pressable>
             )}
           </View>
