@@ -1,50 +1,119 @@
-# Welcome to your Expo app 👋
+# 👜 Handbag Shopping App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern React Native mobile application for browsing and managing luxury handbag collections. Built with Expo and TypeScript for a smooth cross-platform experience.
 
-## Get started
+## 📱 About
 
-1. Install dependencies
+This app allows users to explore a curated collection of designer handbags, save their favorites, and read product reviews. Perfect for fashion enthusiasts looking for their next luxury purchase.
+
+## ✨ Key Features
+
+### 🏠 Browse & Discover
+
+- Explore a collection of luxury handbags from top brands
+- Filter products by brand (Bvlgari, Michael Kors, Burberry, Ferragamo, Fendi)
+- Search for handbags by name, brand, or category
+- View products sorted by price
+- See exclusive discount offers
+- Gender-specific collections clearly marked
+
+### 📝 Product Details
+
+- High-quality product images
+- Detailed product information
+- Price and discount information
+- Customer ratings and reviews
+- Review filtering by star rating
+- Rating distribution insights
+
+### ❤️ Favorites
+
+- Save your favorite handbags for later
+- Manage your wishlist
+- Quick access to saved items
+- Persistent storage across app sessions
+
+### 🎨 User Experience
+
+- Smooth animations and transitions
+- Haptic feedback for interactions
+- Pull-to-refresh functionality
+- Swipe gestures for navigation
+- Clean, modern interface
+- Responsive design
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js installed on your computer
+- iOS Simulator, Android Emulator, or Expo Go app on your phone
+
+### Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/TanMinhNgo/assignment-mma.git
+   cd assignment-mma
+   ```
+
+2. **Install dependencies**
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. **Start the app**
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+4. **Run on your device**
+   - Scan the QR code with Expo Go (Android) or Camera app (iOS)
+   - Or press `i` for iOS Simulator / `a` for Android Emulator
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📸 Screenshots
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+_Coming soon_
 
-## Get a fresh project
+## 🛠 Built With
 
-When you're ready, run:
+- **Expo** - React Native framework
+- **TypeScript** - Type-safe code
+- **NativeWind** - Tailwind CSS styling
+- **Expo Router** - File-based navigation
 
-```bash
-npm run reset-project
-```
+## 🎯 Use Cases
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- Browse luxury handbag collections
+- Compare products and prices
+- Read customer reviews before purchasing
+- Save favorite items for later
+- Discover new brands and styles
+- Find the perfect handbag with filters and search
 
-## Learn more
+## 📱 Supported Platforms
 
-To learn more about developing your project with Expo, look at the following resources:
+- ✅ iOS (iPhone & iPad)
+- ✅ Android (Phone & Tablet)
+- ✅ Web (Progressive Web App)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 👨‍💻 Developer
 
-## Join the community
+**Tan Minh Ngo**
 
-Join our community of developers creating universal apps.
+- GitHub: [@TanMinhNgo](https://github.com/TanMinhNgo)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 📄 License
+
+This project is created for educational purposes as part of FPT Mobile App Development Assignment.
+
+## 🙏 Acknowledgments
+
+Special thanks to the Expo team and the React Native community for their amazing tools and support.
+
+---
+
+**Made with ❤️ for fashion lovers**
