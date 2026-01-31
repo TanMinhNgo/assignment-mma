@@ -35,6 +35,17 @@ export default function RootLayout() {
               fullScreenGestureEnabled: true,
             }}
           />
+          <Stack.Screen
+            name="chatbot"
+            options={{
+              headerShown: true,
+              title: 'Tư Vấn Túi Xách',
+              headerStyle: { backgroundColor: '#007AFF' },
+              headerTintColor: '#FFF',
+              presentation: 'modal',
+              animation: 'slide_from_bottom',
+            }}
+          />
         </Stack>
       </FavoritesProvider>
     </SafeAreaProvider>

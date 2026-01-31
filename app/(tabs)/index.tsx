@@ -1,4 +1,5 @@
 import BrandFilter from '@/components/BrandFilter';
+import FloatingChatButton from '@/components/FloatingChatButton';
 import HandbagCard from '@/components/HandbagCard';
 import axios from '@/lib/axios';
 import { Handbag } from '@/types';
@@ -181,6 +182,7 @@ export default function HomeScreen() {
           keyboardShouldPersistTaps="handled"
           onScrollBeginDrag={dismissKeyboard}
         />
+        <FloatingChatButton />
       </View>
     </TouchableWithoutFeedback>
   );
