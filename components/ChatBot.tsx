@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
@@ -10,9 +11,8 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { MarkdownText } from './MarkdownText';
 import { chatbotService } from '../services/chatbotService';
-import { router } from 'expo-router';
+import { MarkdownText } from './MarkdownText';
 
 export default function ChatBot() {
   const [messages, setMessages] = useState([
@@ -26,6 +26,7 @@ export default function ChatBot() {
 
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
+  const [animatingId, setAnimatingId] = useState<string | null>(null);
   const flatListRef = useRef<FlatList>(null);
 
   const handleSend = async () => {
@@ -45,14 +46,16 @@ export default function ChatBot() {
     try {
       const result = await chatbotService.sendMessage(inputText);
 
+      const botId = (Date.now() + 1).toString();
       const botMessage = {
-        id: (Date.now() + 1).toString(),
-        text: result.success ? result.response : result.error,
+        id: botId,
+        text: result.success ? result.response || '' : result.error || 'Có lỗi xảy ra',
         isBot: true,
         timestamp: new Date(),
       };
       console.log('Bot Message:', botMessage);
 
+      setAnimatingId(botId);
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
       const errorMessage = {
@@ -72,7 +75,7 @@ export default function ChatBot() {
   }, [messages]);
 
   const onClose = () => {
-    router.back(-1);
+    router.back();
   };
 
   const renderMessage = ({ item }: { item: { id: string; text: string; isBot: boolean; timestamp: Date } }) => (
@@ -84,7 +87,12 @@ export default function ChatBot() {
       }`}
     >
       {item.isBot ? (
-        <MarkdownText>{item.text}</MarkdownText>
+        <MarkdownText
+          animate={item.id === animatingId}
+          onDone={() => setAnimatingId(null)}
+        >
+          {item.text}
+        </MarkdownText>
       ) : (
         <Text className="text-base leading-6 text-white">{item.text}</Text>
       )}
