@@ -21,12 +21,15 @@ export default function BrandFilter({
   onSelectBrand,
 }: BrandFilterProps) {
   return (
-    <View className="mb-4">
+    <View>
+      <Text className="text-xs font-semibold text-gray-500 uppercase tracking-wide px-4 mb-3">
+        Filter by Brand
+      </Text>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         className="px-4"
-        contentContainerStyle={{ gap: 8 }}
+        contentContainerStyle={{ paddingRight: 16 }}
       >
         {BRANDS.map((brand) => {
           const isSelected = selectedBrand === brand;
@@ -37,19 +40,23 @@ export default function BrandFilter({
                 await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                 onSelectBrand(brand);
               }}
-              className={`px-5 py-2.5 rounded-full ${
+              android_ripple={{ color: 'transparent' }}
+              style={({ pressed }) => [
+                {
+                  shadowColor: '#000',
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: isSelected ? 0.15 : 0.08,
+                  shadowRadius: isSelected ? 4 : 2,
+                  elevation: isSelected ? 3 : 1,
+                  opacity: pressed ? 0.7 : 1,
+                },
+              ]}
+              className={`px-6 py-3 rounded-full mr-2 ${
                 isSelected ? 'bg-red-500' : 'bg-white border border-gray-200'
               }`}
-              style={{
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 1 },
-                shadowOpacity: 0.1,
-                shadowRadius: 2,
-                elevation: 2,
-              }}
             >
               <Text
-                className={`font-semibold ${
+                className={`font-semibold text-sm ${
                   isSelected ? 'text-white' : 'text-gray-700'
                 }`}
               >

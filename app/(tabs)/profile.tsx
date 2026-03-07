@@ -1,10 +1,64 @@
 import { useFavorites } from '@/providers/FavoritesContext';
 import { Ionicons } from '@expo/vector-icons';
-import React from 'react';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import * as Haptics from 'expo-haptics';
+import { router } from 'expo-router';
+import React, { useState } from 'react';
+import { Alert, Modal, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 
 export default function ProfileScreen() {
   const { favoritesCount } = useFavorites();
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [name, setName] = useState('Ngô Minh Tân');
+  const [email, setEmail] = useState('tannmse182434@fpt.edu.vn');
+
+  const handleMenuPress = async (index: number) => {
+    await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    
+    switch(index) {
+      case 0: // Edit Profile
+        setShowEditModal(true);
+        break;
+      case 1: // My Favorites
+        router.push('/(tabs)/favorite');
+        break;
+      case 2: // Notifications
+        Alert.alert('Notifications', 'Coming soon!');
+        break;
+      case 3: // Settings
+        Alert.alert('Settings', 'Coming soon!');
+        break;
+      case 4: // Help & Support
+        Alert.alert('Help & Support', 'Coming soon!');
+        break;
+      case 5: // About
+        Alert.alert('About', 'Handbag Shopping App v1.0');
+        break;
+    }
+  };
+
+  const handleSaveProfile = async () => {
+    await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    setShowEditModal(false);
+    Alert.alert('Success', 'Profile updated successfully!');
+  };
+
+  const handleLogout = async () => {
+    await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    Alert.alert(
+      'Logout',
+      'Are you sure you want to logout?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { 
+          text: 'Logout', 
+          style: 'destructive',
+          onPress: () => {
+            Alert.alert('Logged out', 'You have been logged out successfully');
+          }
+        }
+      ]
+    );
+  };
 
   const menuItems = [
     { icon: 'person-outline', label: 'Edit Profile', color: '#FF6B6B' },
@@ -54,6 +108,7 @@ export default function ProfileScreen() {
         {menuItems.map((item, index) => (
           <Pressable
             key={index}
+            onPress={() => handleMenuPress(index)}
             className={`flex-row items-center p-4 ${
               index !== menuItems.length - 1 ? 'border-b border-gray-100' : ''
             }`}
@@ -67,12 +122,63 @@ export default function ProfileScreen() {
         ))}
       </View>
 
-      <Pressable className="bg-white mx-4 mt-4 mb-8 rounded-xl p-4 flex-row items-center justify-center shadow-sm">
+      <Pressable 
+        onPress={handleLogout}
+        className="bg-white mx-4 mt-4 mb-8 rounded-xl p-4 flex-row items-center justify-center shadow-sm"
+      >
         <Ionicons name="log-out-outline" size={22} color="#FF6B6B" />
         <Text className="ml-2 text-base font-semibold text-red-500">
           Logout
         </Text>
       </Pressable>
+
+      {/* Edit Profile Modal */}
+      <Modal
+        visible={showEditModal}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setShowEditModal(false)}
+      >
+        <View className="flex-1 bg-black/50 justify-end">
+          <View className="bg-white rounded-t-3xl p-6 pb-10">
+            <View className="flex-row items-center justify-between mb-6">
+              <Text className="text-2xl font-bold text-gray-800">Edit Profile</Text>
+              <Pressable onPress={() => setShowEditModal(false)}>
+                <Ionicons name="close" size={28} color="#666" />
+              </Pressable>
+            </View>
+
+            <View className="mb-4">
+              <Text className="text-sm font-semibold text-gray-600 mb-2">Name</Text>
+              <TextInput
+                value={name}
+                onChangeText={setName}
+                className="bg-gray-50 rounded-xl px-4 py-3 text-base text-gray-800"
+                placeholder="Enter your name"
+              />
+            </View>
+
+            <View className="mb-6">
+              <Text className="text-sm font-semibold text-gray-600 mb-2">Email</Text>
+              <TextInput
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                className="bg-gray-50 rounded-xl px-4 py-3 text-base text-gray-800"
+                placeholder="Enter your email"
+              />
+            </View>
+
+            <Pressable
+              onPress={handleSaveProfile}
+              className="bg-red-500 rounded-xl py-4 items-center"
+            >
+              <Text className="text-white font-bold text-base">Save Changes</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </ScrollView>
   );
 }

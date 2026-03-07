@@ -85,10 +85,21 @@ export default function HandbagCard({ handbag }: HandbagCardProps) {
           {handbag.handbagName}
         </Text>
 
-        <View className="flex-row items-center justify-between">
-          <Text className="text-base font-bold text-red-500">
-            {formatCurrency(handbag.cost)}
-          </Text>
+        <View className="flex-col gap-1">
+          {handbag.percentOff > 0 ? (
+            <>
+              <Text className="text-xs text-gray-400 line-through">
+                {formatCurrency(handbag.cost / (1 - handbag.percentOff))}
+              </Text>
+              <Text className="text-base font-bold text-red-500">
+                {formatCurrency(handbag.cost)}
+              </Text>
+            </>
+          ) : (
+            <Text className="text-base font-bold text-gray-800">
+              {formatCurrency(handbag.cost)}
+            </Text>
+          )}
         </View>
       </View>
     </Pressable>

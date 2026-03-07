@@ -67,7 +67,7 @@ export const chatbotService = {
       console.error('Chatbot Error:', error);
       return {
         success: false,
-        error: 'Không thể kết nối với chatbot. Vui lòng thử lại.',
+        error: 'Unable to connect to chatbot. Please try again.',
       };
     }
   },

@@ -39,11 +39,13 @@ export default function RootLayout() {
             name="chatbot"
             options={{
               headerShown: true,
-              title: 'Tư Vấn Túi Xách',
+              title: 'Shopping Assistant',
               headerStyle: { backgroundColor: '#007AFF' },
               headerTintColor: '#FFF',
               presentation: 'modal',
               animation: 'slide_from_bottom',
+              gestureEnabled: true,
+              gestureDirection: 'horizontal',
             }}
           />
         </Stack>

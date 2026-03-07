@@ -7,15 +7,15 @@ import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import React, { useEffect, useState } from 'react';
 import {
-  ActivityIndicator,
-  FlatList,
-  Keyboard,
-  Pressable,
-  RefreshControl,
-  Text,
-  TextInput,
-  TouchableWithoutFeedback,
-  View,
+    ActivityIndicator,
+    FlatList,
+    Keyboard,
+    Pressable,
+    RefreshControl,
+    Text,
+    TextInput,
+    TouchableWithoutFeedback,
+    View,
 } from 'react-native';
 
 export default function HomeScreen() {
@@ -31,7 +31,7 @@ export default function HomeScreen() {
     try {
       setError(null);
       const response = await axios.get<Handbag[]>('/');
-      const sortedHandbags = response.data.sort((a, b) => b.cost - a.cost);
+      const sortedHandbags = response.data.sort((a: Handbag, b: Handbag) => b.cost - a.cost);
       setHandbags(sortedHandbags);
       setFilteredHandbags(sortedHandbags);
     } catch (err) {
@@ -114,37 +114,34 @@ export default function HomeScreen() {
             {filteredHandbags.length} items available
           </Text>
 
-          <View className="mt-4 flex-row bg-gray-100 rounded-full px-4 py-3">
+          <View className="mt-4 flex-row items-center bg-gray-100 rounded-full px-4 py-2.5">
             <Ionicons
               name="search-outline"
               size={20}
               color="#999"
-              className="mt-1"
             />
             <TextInput
-              className="flex-1 ml-2 text-base text-gray-800 mb-1"
+              className="flex-1 ml-2 text-base text-gray-800"
               placeholder="Search handbags, brands, categories..."
               placeholderTextColor="#999"
               value={searchQuery}
               onChangeText={setSearchQuery}
               returnKeyType="search"
               onSubmitEditing={dismissKeyboard}
-              multiline
             />
             {searchQuery.length > 0 && (
-              <Pressable onPress={handleClearSearch} className="ml-2">
+              <Pressable onPress={handleClearSearch}>
                 <Ionicons
                   name="close-circle"
                   size={20}
                   color="#999"
-                  className="mt-1"
                 />
               </Pressable>
             )}
           </View>
         </View>
 
-        <View className="bg-white py-4">
+        <View className="pt-4 pb-2 bg-gray-50">
           <BrandFilter
             selectedBrand={selectedBrand}
             onSelectBrand={setSelectedBrand}
